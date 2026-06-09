@@ -1,0 +1,19 @@
+{
+  "name": "malvin-c-liz",
+  "version": "1.0.0",
+  "description": "WhatsApp Multi Device Bot - Malvin C Liz | Powered by Handsome Tech Zimbabwe",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18.x"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.6.0",
+    "@hapi/boom": "^10.0.1",
+    "express": "^4.18.2",
+    "pino": "^8.17.2",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
