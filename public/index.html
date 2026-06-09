@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pair - Malvin C Liz | Handsome Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #1a1a1f;
+            padding: 16px 20px;
+            border-bottom: 1px solid #222;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .back-link {
+            color: #00ff88;
+            font-size: 13px;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 32px;
+            font-weight: 700;
+            color: #00ff88;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+        }
+
+        .brand p {
+            font-size: 12px;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 100%;
+            max-width: 400px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+            margin-bottom: 30px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+            background: #15151c;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 30px 25px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 25px;
+            background: #0a0a0f;
+            padding: 6px;
+            border-radius: 10px;
+        }
+
+        .tab-btn {
+            padding: 12px;
+            background: transparent;
+            border: none;
+            color: #666;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .tab-btn.active {
+            background: #00ff88;
+            color: #000;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card-title {
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .phone-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: #0a0a0f;
+            border: 1px solid #333;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 15px;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .phone-input:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+        }
+
+        .phone-input::placeholder {
+            color: #444;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #00ff88;
+            border: none;
+            border-radius: 10px;
+            color: #000;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid rgba(255, 165, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 13px;
+            color: #ffa500;
+            display: none;
+        }
+
+        .status.show {
+            display: block;
+        }
+
+        .status::before {
+            content: '● ';
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0.3; }
+        }
+
+        .code-display {
+            margin-top: 20px;
+            padding: 25px;
+            background: #0a0a0f;
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .code-display.show {
+            display: block;
+        }
+
+        .code-label {
+            font-size: 10px;
+            color: #00ff88;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .code-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 8px;
+            color: #00ff88;
+            margin: 10px 0;
+        }
+
+        .copy-btn {
+            margin-top: 12px;
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            color: #00ff88;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:active {
+            background: #00ff88;
+            color: #000;
+        }
+
+        .qr-display {
+            margin-top: 20px;
+            padding: 20px;
+            background: #0a0a0f;
+            border: 1px solid #333;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .qr-display.show {
+            display: block;
+        }
+
+        .qr-box {
+            width: 240px;
+            height: 240px;
+            background: #fff;
+            border-radius: 10px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .steps {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #222;
+        }
+
+        .steps-title {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
+
+        .step {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            min-width: 24px;
+            height: 24px;
+            background: #00ff88;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .step-text {
+            flex: 1;
+            font-size: 13px;
+            color: #ccc;
+            line-height: 1.6;
+            padding-top: 2px;
+        }
+
+        .error {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
+            color: #ff6b6b;
+            font-size: 12px;
+            text-align: center;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-title">Pair - Malvin C Liz | Handsome Tech</div>
+    </div>
+
+    <div class="main">
+        <a href="#" class="back-link">← BACK HOME</a>
+
+        <div class="brand">
+            <h1>MALVIN C LIZ</h1>
+            <p>HANDSOME TECH • ZIMBABWE</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="card">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('code')">PAIRING CODE</button>
+                <button class="tab-btn" onclick="switchTab('qr')">QR CODE</button>
+            </div>
+
+            <!-- PAIRING CODE TAB -->
+            <div id="codeTab" class="tab-content active">
+                <div class="card-title">GENERATE CODE</div>
+                <div class="card-subtitle">Enter your number to get an 8-digit pairing code</div>
+
+                <div class="input-group">
+                    <label class="input-label">Phone Number</label>
+                    <input 
+                        type="text" 
+                        id="phoneInput" 
+                        class="phone-input" 
+                        placeholder="263*********"
+                        maxlength="15"
+                    >
+                </div>
+
+                <button class="btn" id="codeBtn" onclick="generateCode()">
+                    GENERATE PAIRING CODE
+                </button>
+
+                <div class="status" id="codeStatus">Generating code...</div>
+                <div class="error" id="codeError"></div>
+
+                <div class="code-display" id="codeDisplay">
+                    <div class="code-label">Your Pairing Code</div>
+                    <div class="code-value" id="codeValue">--------</div>
+                    <button class="copy-btn" onclick="copyCode()">COPY CODE</button>
+                </div>
+            </div>
+
+            <!-- QR CODE TAB -->
+            <div id="qrTab" class="tab-content">
+                <div class="card-title">SCAN TO PAIR</div>
+                <div class="card-subtitle">Open WhatsApp and scan the QR code below</div>
+
+                <button class="btn" id="qrBtn" onclick="generateQR()">
+                    REFRESH QR CODE
+                </button>
+
+                <div class="qr-display" id="qrDisplay">
+                    <div class="qr-box" id="qrBox">
+                        Loading QR...
+                    </div>
+                </div>
+
+                <div class="status" id="qrStatus">Waiting for scan...</div>
+            </div>
+
+            <div class="steps">
+                <div class="steps-title">How to Pair</div>
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">Open WhatsApp on your phone</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">Tap Menu (⋮) → Linked Devices</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">Tap "Link a Device"</div>
+                </div>
+                <div class="step" id="step4">
+                    <div class="step-num">4</div>
+                    <div class="step-text" id="step4Text">Tap "Link with phone number instead" and enter the code</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'code';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tab + 'Tab').classList.add('active');
+            
+            // Update step 4 text
+            const step4Text = document.getElementById('step4Text');
+            if (tab === 'qr') {
+                step4Text.textContent = 'Scan the QR code above';
+                generateQR();
+            } else {
+                step4Text.textContent = 'Tap "Link with phone number instead" and enter the code';
+            }
+        }
+
+        async function generateCode() {
+            const phone = document.getElementById('phoneInput').value.trim();
+            const btn = document.getElementById('codeBtn');
+            const errorBox = document.getElementById('codeError');
+            const codeDisplay = document.getElementById('codeDisplay');
+            const status = document.getElementById('codeStatus');
+            
+            errorBox.classList.remove('show');
+            codeDisplay.classList.remove('show');
+            status.classList.remove('show');
+
+            if (!phone || phone.length < 10) {
+                errorBox.textContent = 'Enter valid number with country code';
+                errorBox.classList.add('show');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<div class="loader"></div>';
+            status.classList.add('show');
+
+            try {
+                const res = await fetch('/api/request-pair', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone })
+                });
+
+                const data = await res.json();
+                status.classList.remove('show');
+
+                if (data.code) {
+                    document.getElementById('codeValue').textContent = data.code;
+                    codeDisplay.classList.add('show');
+                } else {
+                    errorBox.textContent = data.error || 'Failed to generate code';
+                    errorBox.classList.add('show');
+                }
+            } catch (e) {
+                status.classList.remove('show');
+                errorBox.textContent = 'Connection error. Check server.';
+                errorBox.classList.add('show');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'GENERATE PAIRING CODE';
+            }
+        }
+
+        async function generateQR() {
+            const qrDisplay = document.getElementById('qrDisplay');
+            const qrStatus = document.getElementById('qrStatus');
+            const qrBox = document.getElementById('qrBox');
+            
+            qrDisplay.classList.add('show');
+            qrStatus.classList.add('show');
+            qrBox.innerHTML = 'Loading QR...';
+
+            // Note: This requires your backend to have /api/request-qr endpoint
+            // that returns { qr: "data:image/png;base64,..." }
+            try {
+                const res = await fetch('/api/request-qr');
+                const data = await res.json();
+
+                if (data.qr) {
+                    qrBox.innerHTML = `<img src="${data.qr}" alt="QR Code">`;
+                } else {
+                    qrBox.innerHTML = 'QR not available.<br>Set PAIR_METHOD=qr in Render<br>and check server logs.';
+                }
+            } catch (e) {
+                qrBox.innerHTML = 'QR endpoint not found.<br>Add /api/request-qr to index.js<br>or use Pairing Code tab.';
+            }
+        }
+
+        function copyCode() {
+            const code = document.getElementById('codeValue').textContent;
+            navigator.clipboard.writeText(code);
+            event.target.textContent = 'COPIED!';
+            setTimeout(() => event.target.textContent = 'COPY CODE', 2000);
+        }
+
+        document.getElementById('phoneInput').addEventListener('keypress', e => {
+            if (e.key === 'Enter') generateCode();
+        });
+    </script>
+</body>
+  </html>
